@@ -1,0 +1,39 @@
+[core]
+    pager = less -FRX
+
+[user]
+    name = kdc
+
+[merge]
+  conflictstyle = diff3
+  tool          = vimdiff
+
+[diff]
+    prompt    = false
+    tool      = vimdiff
+    algorithm = histogram
+
+[color]
+    ui = true
+    diff = auto
+    branch = auto
+    status = auto
+    showbranch = auto
+
+[push]
+    default = upstream
+
+[pull]
+    rebase = false
+
+[blame]
+    date = relative
+    coloring = highlightRecent
+
+[alias]
+    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lgrep = log --grep
+    logdiff = log -p -M --follow --stat --
+
+#[includeIf "gitdir:"]
+#    path = /.gitconfig

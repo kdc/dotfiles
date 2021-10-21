@@ -1,0 +1,192 @@
+syntax enable
+set nocompatible
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+set mouse=
+set vb t_vb=
+set t_Co=16
+set bg=dark
+set display=lastline
+set complete+=k
+set completeopt+=longest
+set clipboard+=unnamed
+colorscheme pablo
+
+call plug#begin()
+Plug 'dense-analysis/ale'
+Plug 'sheerun/vim-polyglot'
+Plug 'luochen1990/rainbow'
+Plug 'zainin/vim-mikrotik'
+call plug#end()
+
+" vim swap file directory
+set directory^=$HOME/.vim/swap//
+
+" my perl includes pod
+let perl_include_pod = 1
+
+" syntax color complex things like @{${"foo"}}
+let perl_extended_vars = 1
+
+set cryptmethod=blowfish2
+
+"disable formatting when pasting
+set pastetoggle=<F2>
+
+" vim Buffers
+map <C-n> <esc>:bnext<CR>
+map <C-p> <esc>:bprev<CR>
+
+map <silent> <F4> :ALEToggle<CR> " Toggle Linting
+map <silent> <F3> :call StripTrailing()<CR> " strip trailing whitespace
+map <silent> <F6> :call ToggleHex()<CR> " Hex Editor
+map <silent> <F7> :setlocal spell! spell?<CR>
+map <silent> <F9> :runtime! syntax/2html.vim<CR> " export to html
+
+" Turn on the WiLd menu
+set wildmenu
+
+"Always show current position
+set ruler
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+set mat=5
+
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+set matchpairs+=<:>
+
+let html_use_css=1 " export to html should use CSS
+
+let php_htmlInStrings=1 " syntax highlight html in strings when editing php
+let php_sql_query=1 " and the same for SQL.
+let php_noShortTags=1 " Something to to with <? vs <?php ?
+let python_highlight_all = 1
+
+let g:ale_python_flake8_options = '--ignore=E501'
+
+filetype plugin on
+filetype indent on
+
+" Always show the status line
+set laststatus=2
+
+set statusline=
+set statusline +=%1*\ %n\ %*            "buffer number
+set statusline +=%5*%{&ff}%*            "file format
+set statusline +=%3*%y%*                "file type
+set statusline +=%4*\ %<%F%*            "full path
+set statusline +=%2*%m%*                "modified flag
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+set statusline +=%1*%4v\ %*             "virtual column number
+set statusline +=%2*0x%04B\ %*          "character under cursor
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+function! StripTrailing()
+    " Strip whitespace but do not report failure.
+    try
+	:%s/\s\+$//g
+    catch
+    endtry
+endfunction
+
+" helper function to toggle hex mode
+function ToggleHex()
+  " hex mode should be considered a read-only operation
+  " save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " save old options
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " set new options
+    setlocal binary " make sure it overrides any textwidth, etc.
+    silent :e " this will reload the file without trickeries
+              "(DOS line endings will be shown entirely )
+    let &ft="xxd"
+    " set status
+    let b:editHex=1
+    " switch to hex editor
+    %!xxd
+  else
+    " restore old options
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " set status
+    let b:editHex=0
+    " return to normal editing
+    %!xxd -r
+  endif
+  " restore values for modified and read only state
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+  let &modifiable=l:oldmodifiable
+endfunction
+
+" Set some options specifically for specific files, group is to
+" prevent problems when re-loading .vimrc
+augroup custom
+    autocmd!
+    autocmd FileType yaml setlocal ai ts=2 sts=2 sw=2 expandtab
+    autocmd BufNewFile,BufRead *.asm set syntax=nasm
+    autocmd BufNewFile,BufRead *.{C,cc,c,cpp,cxx,h,java,php,pas} set formatoptions=croql cindent smarttab
+    autocmd BufNewFile,BufRead Makefile.* set filetype=make
+    autocmd BufNewFile,BufRead *.py set expandtab
+    autocmd BufNewFile,BufRead FileType perl set autoindent|set smartindent
+    autocmd BufNewFile,BufRead *.txt set tw=0 tabstop=8
+    autocmd BufNewFile,BufRead *.tpl set filetype=php
+    autocmd BufNewFile,BufRead *.rsc set syntax=rsc
+    autocmd BufWritePre * call StripTrailing()
+augroup END
+
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL

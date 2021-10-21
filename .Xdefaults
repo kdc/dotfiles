@@ -1,0 +1,30 @@
+!!Dark Mode
+*VT100*foreground: gray90
+*VT100*background: black
+*VT100*color4: DodgerBlue1
+*VT100*color12: SteelBlue1
+
+!xft
+Xft.autohint: 1
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+!!xterm
+xterm*utf8: true
+xterm*dynamicColors: true
+xterm*renderFont: true
+!xterm*internalBorder: 4
+xterm*locale: true
+xterm*metaSendsEscape: true
+xterm*selectToClipboard: true
+xterm*highlightSelection: true
+xterm*trimSelection: true
+xterm*saveLines: 65536
+xterm*fastScroll: true
+xterm*termName: xterm-256color
+xterm*faceName: xft:DejaVu Sans Mono:pixelsize=14
+xterm*printerCommand: xterm -T History -e sh -c 'less -r -o /tmp/xterm.dump.$$ <&3' 3<&0
+xterm*translations: #override Ctrl <Key>slash: print-everything()

@@ -1,0 +1,60 @@
+# disable startup message
+startup_message off
+
+#key binding
+bind " " windowlist -b #C-a space
+bind 'x' remove #C-a x
+
+# Bind F11 and F12 (NOT F1 and F2) to previous and next screen window
+bindkey -k F1 prev
+bindkey -k F2 next
+
+# Also for ctrl-alt right and left arrows
+# Note disable in window manager to allow through
+bindkey ^[[1;7D prev
+bindkey ^[[1;7C next
+
+# From Stephen Shirley
+# Don't block command output if the terminal stops responding
+# (like if the ssh connection times out for example).
+nonblock on
+
+#Residual Editor Text
+altscreen on
+
+#Scrollback length
+defscrollback 65536
+
+#Case insensitive searching
+ignorecase on
+
+#Terminal Options
+termcapinfo xterm* ti@:te@
+termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+attrcolor b ".I"
+term xterm-256color
+shell -${SHELL}
+
+# In case of ssh disconnect or any weirdness, the screen will auto detach
+autodetach on
+
+# Fix for residual editor text
+altscreen on
+
+pow_detach_msg "Screen session for \${LOGNAME} \$:cr:\$:nl:ended"
+logfile "$HOME/.log/screen.%n.%Y-%m-%d"
+
+#Status Line
+backtick 1 5 5 true
+hardstatus alwayslastline "%{rk}%H%{gk} | %c | %{rk} %l %{wk} | %?%-Lw%?%{g}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?"
+
+#Vertical and Horizontal Bars
+# rendition so =00
+caption string "%{03} "
+
+# WindowList
+windowlist string "%4n %h%=%f"
+
+
+#Windows
+#screen -t 42
