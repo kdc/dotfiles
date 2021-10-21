@@ -2,6 +2,12 @@ if [[ $- != *i* ]] ; then
     return
 fi
 
+if [ -f /etc/bashrc ]; then
+    source /etc/bashrc
+elif [ -f /etc/bash/bashrc ]; then
+    source /etc/bash/bashrc
+fi
+
 export EDITOR="vim"
 export VISUAL=$EDITOR
 export PAGER="less"
