@@ -23,7 +23,7 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 #export BAT_PAGER="cat"
-#export BAT_PAGER="less -RFX"
+#export BAT_PAGER="less -RFXi"
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 #export MANROFFOPT="-c"
 
