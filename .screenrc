@@ -34,6 +34,7 @@ termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 attrcolor b ".I"
 term xterm-256color
 shell -${SHELL}
+defbce on
 
 # In case of ssh disconnect or any weirdness, the screen will auto detach
 autodetach on
@@ -54,7 +55,3 @@ caption string "%{03} "
 
 # WindowList
 windowlist string "%4n %h%=%f"
-
-
-#Windows
-#screen -t 42
