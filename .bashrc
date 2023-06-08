@@ -11,6 +11,8 @@ fi
 export EDITOR="vim"
 export VISUAL=$EDITOR
 export PAGER="less"
+#export MANPAGER="col -b | view -c 'set ft=man ts=8 nomod nolist nonu noma' -" #BSD
+export MANPAGER='vim -c "%! col -b" -c "set ft=man ts=8 nomod nolist nonu noma" -' #Linux
 
 HISTCONTROL=ignoreboth
 HISTIGNORE='ls:history'
