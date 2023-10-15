@@ -5,20 +5,31 @@ set softtabstop=4
 set shiftwidth=4
 set mouse=
 set vb t_vb=
-set t_Co=16
+set t_Co=256
 set bg=dark
 set display=lastline
 set complete+=k
 set completeopt+=longest
 set clipboard+=unnamed
-colorscheme pablo
 
 call plug#begin()
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'luochen1990/rainbow'
 Plug 'zainin/vim-mikrotik'
+Plug 'wilriker/gcode.vim'
 call plug#end()
+
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'transparent_background': 1
+  \     }
+  \   }
+  \ }
+
+colorscheme PaperColor
 
 " vim swap file directory
 set directory^=$HOME/.vim/swap//
