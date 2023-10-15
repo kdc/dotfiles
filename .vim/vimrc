@@ -183,16 +183,16 @@ endfunction
 " prevent problems when re-loading .vimrc
 augroup custom
     autocmd!
-    autocmd FileType yaml setlocal ai ts=2 sts=2 sw=2 expandtab
     autocmd BufNewFile,BufRead *.asm set syntax=nasm
     autocmd BufNewFile,BufRead *.{C,cc,c,cpp,cxx,h,java,php,pas} set formatoptions=croql cindent smarttab
     autocmd BufNewFile,BufRead Makefile.* set filetype=make
     autocmd BufNewFile,BufRead *.py set expandtab
     autocmd BufNewFile,BufRead FileType perl set autoindent|set smartindent
+    autocmd BufWritePre * call StripTrailing()
     autocmd BufNewFile,BufRead *.txt set tw=0 tabstop=8
     autocmd BufNewFile,BufRead *.tpl set filetype=php
     autocmd BufNewFile,BufRead *.rsc set syntax=rsc
-    autocmd BufWritePre * call StripTrailing()
+    autocmd FileType yaml setlocal ai ts=2 sts=2 sw=2 expandtab
 augroup END
 
 " Load all plugins now.
