@@ -24,16 +24,21 @@
     default = upstream
 
 [pull]
-    rebase = false
+    rebase = true
 
 [blame]
     date = relative
     coloring = highlightRecent
 
 [alias]
-    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    s = status -s
     lgrep = log --grep
+    undo = reset --soft HEAD~1
     logdiff = log -p -M --follow --stat --
+    stash-all = stash save --include-untracked
+    alias = !git config --get-regexp alias
+    l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    tar = "!f(){ tarball_name=$(basename $(pwd)).tar.gz; git archive --format=tar HEAD | gzip > /tmp/$tarball_name; echo \"Created /tmp/$tarball_name\"; }; f"
 
-#[includeIf "gitdir:"]
-#    path = /.gitconfig
+[includeIf "gitdir:~/git/folder/"]
+    path = ~/git/folder/.gitconfig
