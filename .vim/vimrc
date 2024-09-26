@@ -9,7 +9,7 @@ set t_Co=256
 set bg=dark
 set display=lastline
 set complete+=k
-set completeopt+=longest
+set completeopt+=fuzzy
 set clipboard+=unnamed
 
 call plug#begin()
