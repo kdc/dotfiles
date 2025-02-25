@@ -39,6 +39,3 @@
     alias = !git config --get-regexp alias
     l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     tar = "!f(){ tarball_name=$(basename $(pwd)).tar.gz; git archive --format=tar HEAD | gzip > /tmp/$tarball_name; echo \"Created /tmp/$tarball_name\"; }; f"
-
-[includeIf "gitdir:~/git/folder/"]
-    path = ~/git/folder/.gitconfig
