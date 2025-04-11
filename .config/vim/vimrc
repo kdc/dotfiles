@@ -8,12 +8,10 @@ set vb t_vb=
 set t_Co=256
 set bg=dark
 set display=lastline
-set complete+=k
-set completeopt+=fuzzy
 set clipboard+=unnamed
 
 " vim swap file directory
-set directory^=$HOME/.vim/swap//
+set directory^=$HOME/.config/vim/swap//
 
 "disable formatting when pasting
 set pastetoggle=<F2>
@@ -21,7 +19,6 @@ set pastetoggle=<F2>
 map <silent> <F3> :call StripTrailing()<CR> " strip trailing whitespace
 map <silent> <F6> :call ToggleHex()<CR> " Hex Editor
 map <silent> <F7> :setlocal spell! spell?<CR>
-map <silent> <F9> :runtime! syntax/2html.vim<CR> " export to html
 
 " Turn on the WiLd menu
 set wildmenu
@@ -70,8 +67,6 @@ set wrap "Wrap lines
 
 set matchpairs+=<:>
 
-let html_use_css=1 " export to html should use CSS
-
 filetype plugin on
 filetype indent on
 
@@ -89,6 +84,8 @@ set statusline +=%2*/%L%*               "total lines
 set statusline +=%1*%4v\ %*             "virtual column number
 set statusline +=%2*0x%04B\ %*          "character under cursor
 
+" Set some options specifically for specific files, group is to
+" prevent problems when re-loading .vimrc
 augroup custom
     autocmd!
     autocmd BufNewFile,BufRead Makefile.* set filetype=make
