@@ -24,7 +24,7 @@
     default = upstream
 
 [pull]
-    rebase = true
+    rebase = false
 
 [blame]
     date = relative
