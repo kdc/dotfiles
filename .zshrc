@@ -5,6 +5,7 @@ PROMPT='%F{green}%m%f %F{blue}%1~%f %# '
 
 # Custom Variables
 EDITOR=vim
+export LESS='-R -i -F -X -M'
 
 # History Search
 autoload -U up-line-or-beginning-search

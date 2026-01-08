@@ -11,7 +11,8 @@ fi
 export EDITOR="vim"
 export VISUAL=$EDITOR
 export PAGER="less"
-export MANPAGER='less -X';
+export LESS='-R -i -F -X -M'
+export MANPAGER='less'
 
 HISTCONTROL=ignoreboth
 HISTIGNORE='ls:history'
