@@ -1,4 +1,3 @@
-.
 # disable startup message
 startup_message off
 
@@ -6,7 +5,7 @@ startup_message off
 bind " " windowlist -b #C-a space
 bind 'x' remove #C-a x
 
-# Bind F11 and F12 (NOT F1 and F2) to previous and next screen window
+# Bind F1 and F2 to previous and next screen window
 bindkey -k F1 prev
 bindkey -k F2 next
 
@@ -19,9 +18,6 @@ bindkey ^[[1;7C next
 # Don't block command output if the terminal stops responding
 # (like if the ssh connection times out for example).
 nonblock on
-
-#Residual Editor Text
-altscreen on
 
 #Scrollback length
 defscrollback 65536
@@ -39,9 +35,6 @@ defbce on
 
 # In case of ssh disconnect or any weirdness, the screen will auto detach
 autodetach on
-
-# Fix for residual editor text
-altscreen on
 
 pow_detach_msg "Screen session for \${LOGNAME} \$:cr:\$:nl:ended"
 logfile "$HOME/.log/screen.%n.%Y-%m-%d"

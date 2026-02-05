@@ -9,9 +9,6 @@ set mark-symlinked-directories On
 set show-all-if-unmodified on
 set show-all-if-ambiguous on
 
-# Show all completions as soon as I press tab, even if there's more than one
-set show-all-if-ambiguous on
-
 # map "page up" and "page down" to search history based on current cmdline
 "\e[5~": history-search-backward
 "\e[6~": history-search-forward

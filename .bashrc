@@ -12,7 +12,8 @@ export EDITOR="vim"
 export VISUAL=$EDITOR
 export PAGER="less"
 export LESS='-R -i -F -X -M'
-export MANPAGER='less'
+
+: "${LSCOLORS:=ExFxBxDxCxegedabagacad}" ; export LSCOLORS
 
 HISTCONTROL=ignoreboth
 HISTIGNORE='ls:history'
@@ -22,14 +23,14 @@ HISTSIZE=65536
 shopt -s checkwinsize
 shopt -s histappend
 
-PROMPT_COMMAND='history -a'
+PROMPT_COMMAND='history -a; history -n'
 
-if [ $UID == 0 ]; then
-    export PS1="\[\e[31m\]\h\[\e[m\]\[\e[33m\]:\[\e[m\]\[\e[33m\]\W\[\e[m\] \[\e[31m\]\\$\[\e[m\] "
-elif [[ $UID == 1000 ]]; then
-    export PS1="\[\e[36m\]\h\[\e[m\]\[\e[33m\]:\[\e[m\]\[\e[33m\]\W\[\e[m\] \[\e[31m\]\\$\[\e[m\] "
+if [[ $UID -eq 0 ]]; then
+	export PS1="\[\e[31m\]\h\[\e[m\]\[\e[33m\]:\[\e[m\]\[\e[33m\]\W\[\e[m\] \[\e[31m\]\\$\[\e[m\] "
+elif [[ $UID -eq 1000 ]]; then
+	export PS1="\[\e[36m\]\h\[\e[m\]\[\e[33m\]:\[\e[m\]\[\e[33m\]\W\[\e[m\] \[\e[31m\]\\$\[\e[m\] "
 else
-    export PS1="\[\e[34m\]\h\[\e[m\]\[\e[33m\]:\[\e[m\]\[\e[33m\]\W\[\e[m\] \[\e[31m\]\\$\[\e[m\] "
+	export PS1="\[\e[34m\]\h\[\e[m\]\[\e[33m\]:\[\e[m\]\[\e[33m\]\W\[\e[m\] \[\e[31m\]\\$\[\e[m\] "
 fi
 
 # shellcheck source=/dev/null

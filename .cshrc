@@ -4,7 +4,7 @@ alias ls	ls -G
 alias vi	vim
 
 setenv	EDITOR	vim
-setenv	PAGER	more
+setenv	PAGER	less
 
 if ($?prompt) then
 	# An interactive shell -- set some stuff up
